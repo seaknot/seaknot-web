@@ -112,3 +112,4 @@
            ))))))))
 
 (define-http-handler #/^\/static\// (file-handler))
+(define-http-handler "/favicon.ico" (file-handler))
