@@ -1,5 +1,6 @@
-PlayLogic
-=========
+---
+title: PlayLogic
+...
 
 Overview
 --------

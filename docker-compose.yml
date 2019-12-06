@@ -37,5 +37,11 @@ services:
     depends_on:
     - letsencrypt
 
+  pandoc:
+    image: pandoc/latex
+    volumes:
+      - .:/code
+    working_dir: /code
+
 volumes:
   logvolume01: {}
