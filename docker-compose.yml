@@ -38,7 +38,7 @@ services:
     - letsencrypt
 
   pandoc:
-    image: pandoc/latex
+    image: pandoc/latex:2.8.0.1
     volumes:
       - .:/code
     working_dir: /code
