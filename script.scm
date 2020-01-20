@@ -90,7 +90,7 @@
          "<!DOCTYPE html>"
          (sxml:sxml->html
           (create-page
-           "Seaknot Studio"
+           "Seaknot Studios"
            `(div (@ (class "jumbotron") (style "text-align: center"))
                  (img (@ (src "/static/seaknot-logo-320.png")))
                  (h1 (@ (class "display-4"))
@@ -99,8 +99,8 @@
                     "我々は日本語で遊べる良質なアドベンチャーゲームに取り組んでいます。")
                  )
            `(div (hr (@ (class "my-4")))
-                 (p "© Seaknot Studios 2019")
-                 (p "Follow us on Twitter: "
+                 (p "© Seaknot Studios GK 2020.")
+                 (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
                     (a (@ (href "https://twitter.com/seaknotstudios"))
                        "@seaknotstudios"))
                  (p "Logo Image by "
