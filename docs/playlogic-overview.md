@@ -1,3 +1,9 @@
+# PlayLogic: アドベンチャーゲームツールキット
+
+Toru Hisai / Seaknot Studios
+
+@torus
+
 ## マップの設定
 
 ### 全体
