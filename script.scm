@@ -100,24 +100,29 @@
          (sxml:sxml->html
           (create-page
            "Seaknot Studios"
+		   `(h1 (@ (style "text-align: center") (class "display-4"))
+                "Seaknot Studios" (br) "シーノットスタジオ")
            `(div (@ (class "jumbotron") (style "text-align: center"))
-                 (img (@ (src "/static/seaknot-logo-320.png")))
-                 (h1 (@ (class "display-4"))
-                     "Seaknot Studios" (br) "シーノットスタジオ")
+				 (h2 "#UKIYO")
+                 (img (@ (style "max-width: 100%") (src "/static/ukiyo-image.jpg")))
                  (p (@ (class "lead"))
-                    "我々は日本語で遊べる良質なアドベンチャーゲームに取り組んでいます。")
+                    "Unreal Engine 4 と Spine を使ってアドベンチャーゲームを作っています。"
+					(br)
+					"（画像は開発中の画面です。もっとかっこよくなります！）"
+					(br)
+					"詳しくは "
+					(a (@ (href "https://twitter.com/seaknotstudios")) "Twitter")
+					" を参照してください。")
                  )
            `(div (hr (@ (class "my-4")))
                  (p "© Seaknot Studios GK 2020.")
                  (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
                     (a (@ (href "https://twitter.com/seaknotstudios"))
-                       "@seaknotstudios"))
-                 (p "Logo Image by "
-                    (a (@ (href "https://pixabay.com/users/35393-35393/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=365846"))
-                       "Don Cloud")
-                    " from "
-                    (a (@ (href "https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=365846"))
-                       "Pixabay")))
+                       "@seaknotstudios")
+					" | Like us on "
+					(a (@ (href "https://www.facebook.com/seaknotstudios/"))
+					   "our Facebook Page"))
+                 )
            ))))))))
 
 (define-http-handler #/^\/static\// (file-handler))
