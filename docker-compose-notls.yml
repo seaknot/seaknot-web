@@ -5,6 +5,6 @@ services:
     volumes:
       - .:/code
     ports:
-      - "2000:2000"
+      - "2222:2222"
     expose:
-      - "2000"
+      - "2222"

@@ -30,7 +30,7 @@ services:
       LETSENCRYPT_HOST: seaknot.dev
       LETSENCRYPT_EMAIL: toru-letsencrypt@torus.jp
     expose:
-    - "2000"
+    - "2222"
     volumes:
     - .:/code
     - logvolume01:/var/log
