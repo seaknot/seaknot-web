@@ -3,11 +3,8 @@
 
 (use sxml.tools)
 
-(add-load-path "gauche-rheingau/lib" :relative)
-(use rheingau)
-(rheingau-use makiki)
+(use makiki)
 
-(add-load-path "lib" :relative)
 (use violet)
 
 ;;
@@ -100,10 +97,12 @@
          (sxml:sxml->html
           (create-page
            "Seaknot Studios"
-		   `(h1 (@ (style "text-align: center") (class "display-4"))
-                "Seaknot Studios" (br) "シーノットスタジオ")
+		   `(h1 (@ (style "text-align: center"))
+                (img (@ (src "/static/seaknot-logo-512x256.png")
+                        (alt "Seaknot Studios")
+                        (width "512") (height "256"))))
            `(div (@ (class "jumbotron") (style "text-align: center"))
-				 (h2 "#UKIYO")
+				 (h2 "制作中のタイトル「浮世 (Ukiyo)」")
                  (img (@ (style "max-width: 100%") (src "/static/ukiyo-image.jpg")))
                  (p (@ (class "lead"))
                     "Unreal Engine 4 と Spine を使ってアドベンチャーゲームを作っています。"
