@@ -148,8 +148,7 @@
              (section
               (@ (style "margin-top: 10em;"))
               (h3 "メディア")
-              (iframe (@ (width "560")
-                         (height "315")
+              (iframe (@ (style "width:560px;height:315px;max-width:100%")
                          (src "https://www.youtube.com/embed/SqL2a7NQH84")
                          (title "YouTube video player")
                          (frameborder "0")
