@@ -130,7 +130,7 @@
          "<!DOCTYPE html>"
          (sxml:sxml->html
           (create-page
-           "Seaknot Studios"
+           "浮世 Ukiyo -Seaknot Studios"
            `(img (@ (src "/static/ukiyo/ukiyo-poster.jpg")
                     (style "max-width: 90%")
                     (alt "ゲーム「浮世」のポスター")))
