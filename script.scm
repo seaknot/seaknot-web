@@ -86,6 +86,17 @@
                         (x->string ch))))
        result))))
 
+(define (footer)
+  `(div (hr (@ (class "my-4")))
+        (p "© " (a (@ (href "/")) "Seaknot Studios GK") " 2020-2021.")
+        (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
+           (a (@ (href "https://twitter.com/seaknotstudios"))
+              "@seaknotstudios")
+           " | Like us on "
+           (a (@ (href "https://www.facebook.com/seaknotstudios/"))
+              "our Facebook Page"))
+        ))
+
 (define-http-handler "/"
   (^[req app]
     (violet-async
@@ -97,31 +108,76 @@
          (sxml:sxml->html
           (create-page
            "Seaknot Studios"
-		   `(h1 (@ (style "text-align: center"))
+           `(h1 (@ (style "text-align: center"))
                 (img (@ (src "/static/seaknot-logo-512x256.png")
                         (alt "Seaknot Studios")
-                        (width "512") (height "256"))))
+                        (style "max-width: 90%"))))
            `(div (@ (class "jumbotron") (style "text-align: center"))
-				 (h2 "制作中のタイトル「浮世 (Ukiyo)」")
-                 (img (@ (style "max-width: 100%") (src "/static/ukiyo-image.jpg")))
-                 (p (@ (class "lead"))
-                    "Unreal Engine 4 と Spine を使ってアドベンチャーゲームを作っています。"
-					(br)
-					"（画像は開発中の画面です。もっとかっこよくなります！）"
-					(br)
-					"詳しくは "
-					(a (@ (href "https://twitter.com/seaknotstudios")) "Twitter")
-					" を参照してください。")
-                 )
-           `(div (hr (@ (class "my-4")))
-                 (p "© Seaknot Studios GK 2020.")
-                 (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
-                    (a (@ (href "https://twitter.com/seaknotstudios"))
-                       "@seaknotstudios")
-					" | Like us on "
-					(a (@ (href "https://www.facebook.com/seaknotstudios/"))
-					   "our Facebook Page"))
-                 )
+                 (h3 (a (@ (href "/ukiyo/"))
+                        "「浮世 (Ukiyo)」"))
+                 (img (@ (style "max-width: 100%")
+                         (src "/static/ukiyo-image.jpg"))))
+           (footer)
+           ))))))))
+
+(define-http-handler #/^\/ukiyo\/?$/
+  (^[req app]
+    (violet-async
+     (^[await]
+       (respond/ok
+        req
+        (cons
+         "<!DOCTYPE html>"
+         (sxml:sxml->html
+          (create-page
+           "Seaknot Studios"
+           `(img (@ (src "/static/ukiyo/ukiyo-poster.jpg")
+                    (style "max-width: 90%")
+                    (alt "ゲーム「浮世」のポスター")))
+
+
+           '(div
+             (section
+              (@ (style "margin-top: 10em;"))
+              (h3 "仮想空間を旅するサムライネコの物語")
+              (p "和風サイバーパンク仮想世界「UKIYO」は今日も多くのアバターで賑わっていた。")
+              (p "しかしそこに小さな異変が。"
+                 "なんとゲーム内のフレンドがみんなゲームの世界の住人になってしまったのだ。")
+              (p "現実世界に戻るため、サムライネコのカイが仲間とともに仮想空間を旅する。"))
+
+             (section
+              (@ (style "margin-top: 10em;"))
+              (h3 "メディア")
+              (iframe (@ (width "560")
+                         (height "315")
+                         (src "https://www.youtube.com/embed/SqL2a7NQH84")
+                         (title "YouTube video player")
+                         (frameborder "0")
+                         (allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
+                         (allowfullscreen "allowfullscreen")) ""))
+
+             (section
+              (@ (style "margin-top: 10em;"))
+              (h3 "概要")
+              (table (@ (class "table"))
+                     (tr (td "ゲームジャンル")
+                         (td "和風サイバーパンクアドベンチャー"))
+                     (tr (td "制作")
+                         (td (a (@ (href "/"))
+                                "シーノットスタジオ")
+                             "、"
+                             (a (@ (href "https://freakydesign.com/")
+                                   (target "_blank")
+                                   (rel "noopener noreferrer"))
+                                "フリーキーデザイン")))
+                     (tr (td "対応プラットフォーム")
+                         (td "PC、Xbox One、他"))
+                     (tr (td "マルチプレイ対応")
+                         (td "シングルプレイ"))
+                     (tr (td "発売日")(td "2022")))))
+
+           (footer)
+
            ))))))))
 
 (define-http-handler #/^\/static\// (file-handler))
