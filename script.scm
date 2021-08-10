@@ -112,6 +112,13 @@
                 (img (@ (src "/static/seaknot-logo-512x256.png")
                         (alt "Seaknot Studios")
                         (style "max-width: 90%"))))
+
+           '(div (@ (class "alert alert-primary")
+                    (role "alert"))
+                 "お知らせ："
+                 (a (@ (href "/news/2021/2021-08-10-ukiyo-bitsummit/"))
+                    "BitSummit THE 8th BIT に「浮世」を出展"))
+
            `(div (@ (class "jumbotron") (style "text-align: center"))
                  (h3 (a (@ (href "/ukiyo/"))
                         "「浮世 (Ukiyo)」"))
@@ -175,6 +182,81 @@
                          (td "シングルプレイ"))
                      (tr (td "発売日")(td "2022")))))
 
+           (footer)
+
+           ))))))))
+
+;; <nav aria-label="breadcrumb">
+;;   <ol class="breadcrumb">
+;;     <li class="breadcrumb-item"><a href="#">Home</a></li>
+;;     <li class="breadcrumb-item"><a href="#">Library</a></li>
+;;     <li class="breadcrumb-item active" aria-current="page">Data</li>
+;;   </ol>
+;; </nav>
+
+(define (breadcrumb . path)
+  `(nav (@ (aria-label "breadcrumb"))
+        (ol (@ (class "breadcrumb"))
+         ,@(let loop ((path path))
+            (if (null? path)
+                ()
+                (let ((p (car path)))
+                  (if (pair? (cdr path))
+                      (cons #?=`(li (@ (class "breadcrumb-item"))
+                                    (a ,(if (cadr path)
+                                         `(@ (href ,(cadr p)))
+                                         ())
+                                    ,(car p)))
+                            (loop (cdr path)))
+                      #?=`((li (@ (class "breadcrumb-item active"))
+                           (a (@ ,@(if (cadr p)
+                                   `((href ,(cadr p)))
+                                   ())
+                                 (aria-current "page"))
+                              ,(car p))))
+                      )))
+            )
+
+
+         ))
+
+  )
+
+(define-http-handler #/^\/news\/2021\/2021-08-10-ukiyo-bitsummit\/?$/
+  (^[req app]
+    (violet-async
+     (^[await]
+
+(print (breadcrumb '("Seaknot Studios" "/")
+                       '("News" #f)))
+
+       (respond/ok
+        req
+        (cons
+         "<!DOCTYPE html>"
+         (sxml:sxml->html
+          (create-page
+           "お知らせ：BitSummit 2021 に浮世を出展 -Seaknot Studios"
+
+           (breadcrumb '("Seaknot Studios" "/")
+                       '("News" #f))
+
+           '(
+             (h1 "BitSummit THE 8th BIT に「浮世」を出展")
+
+             (p "シーノット合同会社は "
+                "2021 年 9 月 2 日から 2 日間、京都市勧業館みやこめっせにて開かれるインディゲームの"
+                "イベント"
+                (a (@ (href "https://bitsummit.org/") (target "_blank"))
+                   "BitSummit THE 8th BIT")
+                "に自社で開発中のゲーム"
+                (a (@ (href "https://seaknot.dev/ukiyo/") (target "_blank"))
+                   "「浮世 (Ukiyo)」")
+                "を出展します。")
+             (p "イベント会場では「浮世」のデモ版を展示し、来場いただいた方々にその場で遊んでいただけます。"
+                "ご来場の際にはぜひ「浮世」のブースにお立ち寄りください。"
+                )
+             )
            (footer)
 
            ))))))))
