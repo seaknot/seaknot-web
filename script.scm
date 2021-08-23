@@ -25,17 +25,17 @@
     (body
      ,@children
      (script (@ (src "/static/script.js")) "")
-     ,(google-adsense "UA-158830523-1")))
+     ,(google-analytics "UA-158830523-1")))
   )
 
-(define (google-adsense tag)
+(define (google-analytics tag)
   ;; <!-- Global site tag (gtag.js) - Google Analytics -->
-  `(script (@ (src ,#"https://www.googletagmanager.com/gtag/js?id=~tag")) "")
-  `(script "  window.dataLayer = window.dataLayer || [];"
-           "  function gtag(){dataLayer.push(arguments);}"
-           "  gtag('js', new Date());"
-           ,#"  gtag('config', '~|tag|');"
-           ))
+  `((script (@ (src ,#"https://www.googletagmanager.com/gtag/js?id=~tag")) "")
+    (script "  window.dataLayer = window.dataLayer || [];"
+            "  function gtag(){dataLayer.push(arguments);}"
+            "  gtag('js', new Date());"
+            ,#"  gtag('config', '~|tag|');"
+            )))
 
 (define (footer)
   `(footer (@ (class "footer"))
