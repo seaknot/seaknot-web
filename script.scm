@@ -11,91 +11,43 @@
 ;; Application
 ;;
 
-(define (create-page title . children)
+(define (create-page/title title . children)
   `(html
     (@ (lang "en"))
     (head
      (meta (@ (charset "utf-8")))
-     (meta (@ (name "viewport") (content "width=device-width, initial-scale=1, shrink-to-fit=no")))
-     (meta (@ (name "description") (content "")))
-     (meta (@ (name "author") (content "Mark Otto, Jacob Thornton, and Bootstrap contributors")))
+     (meta (@ (name "viewport") (content "width=device-width, initial-scale=1")))
      (title ,title)
-     (link (@
-            (rel "stylesheet")
-            (integrity "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T")
-            (href "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
-            (crossorigin "anonymous")))
-     (style
-         (string-append
-          ".bd-placeholder-img {"
-          "  font-size: 1.125rem;"
-          "  text-anchor: middle;"
-          "  -webkit-user-select: none;"
-          "  -moz-user-select: none;"
-          "  -ms-user-select: none;"
-          "  user-select: none;"
-          "}"
-          "@media (min-width: 768px) {"
-          "  .bd-placeholder-img-lg {"
-          "    font-size: 3.5rem;"
-          "  }"
-          "}"
-          ))
-     (link (@ (rel "stylesheet") (href "/static/starter-template.css"))))
+     (link (@ (rel "stylesheet")
+              (href "https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css")))
+     (script (@ (src "https://kit.fontawesome.com/515fd4f349.js")
+                (crossorigin "anonymous")) ""))
     (body
-     (main
-      (@ (role "main") (class "container"))
-      ,@children)
+     ,@children
      (script (@ (src "/static/script.js")) "")
-     (script (@
-              (src "https://code.jquery.com/jquery-3.3.1.slim.min.js")
-              (integrity "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo")
-              (crossorigin "anonymous"))
-             "")
-     (script (@
-              (src "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js")
-              (integrity "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1")
-              (crossorigin "anonymous"))
-             "")
-     (script (@
-              (src "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js")
-              (integrity "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM")
-              (crossorigin "anonymous"))
-             "")
-
-     ;; <!-- Global site tag (gtag.js) - Google Analytics -->
-     (script (@ (src "https://www.googletagmanager.com/gtag/js?id=UA-158830523-1")) "")
-     (script "  window.dataLayer = window.dataLayer || [];"
-             "  function gtag(){dataLayer.push(arguments);}"
-             "  gtag('js', new Date());"
-             "  gtag('config', 'UA-158830523-1');"
-             )
-     ))
+     ,(google-adsense "UA-158830523-1")))
   )
 
-
-
-(define (get-random)
-  (call-with-input-file "/dev/random"
-    (^p
-     (let* ((ch (read-char p))
-            (result (if (char? ch)
-                        (let ((num (char->integer ch)))
-                          (thread-sleep! (/ num 1000))
-                          num)
-                        (x->string ch))))
-       result))))
+(define (google-adsense tag)
+  ;; <!-- Global site tag (gtag.js) - Google Analytics -->
+  `(script (@ (src ,#"https://www.googletagmanager.com/gtag/js?id=~tag")) "")
+  `(script "  window.dataLayer = window.dataLayer || [];"
+           "  function gtag(){dataLayer.push(arguments);}"
+           "  gtag('js', new Date());"
+           ,#"  gtag('config', '~|tag|');"
+           ))
 
 (define (footer)
-  `(div (hr (@ (class "my-4")))
-        (p "© " (a (@ (href "/")) "Seaknot Studios GK") " 2020-2021.")
-        (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
-           (a (@ (href "https://twitter.com/seaknotstudios"))
-              "@seaknotstudios")
-           " | Like us on "
-           (a (@ (href "https://www.facebook.com/seaknotstudios/"))
-              "our Facebook Page"))
-        ))
+  `(footer (@ (class "footer"))
+           (div (@ (class "content"))
+                (p "© " (a (@ (href "/")) "Seaknot Studios G.K.") " 2020-2021.")
+                (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
+                   (a (@ (href "https://twitter.com/seaknotstudios"))
+                      "@seaknotstudios")
+                   " | Like us on "
+                   (a (@ (href "https://www.facebook.com/seaknotstudios/"))
+                      "our Facebook Page"))
+                )))
 
 (define-http-handler "/"
   (^[req app]
@@ -106,24 +58,26 @@
         (cons
          "<!DOCTYPE html>"
          (sxml:sxml->html
-          (create-page
+          (create-page/title
            "Seaknot Studios"
            `(h1 (@ (style "text-align: center"))
                 (img (@ (src "/static/seaknot-logo-512x256.png")
                         (alt "Seaknot Studios")
                         (style "max-width: 90%"))))
 
-           '(div (@ (class "alert alert-primary")
-                    (role "alert"))
+           '(div (@ (class "notification is-primary is-light"))
                  "お知らせ："
                  (a (@ (href "/news/2021/2021-08-10-ukiyo-bitsummit/"))
-                    "BitSummit THE 8th BIT に「浮世」を出展"))
+                    "BitSummit THE 8th BIT に「浮世」を出展 (2021-08-10)"))
 
-           `(div (@ (class "jumbotron") (style "text-align: center"))
-                 (h3 (a (@ (href "/ukiyo/"))
-                        "「浮世 (Ukiyo)」"))
-                 (img (@ (style "max-width: 100%")
-                         (src "/static/ukiyo-image.jpg"))))
+           `(section (@ (class "hero")
+                        (style "text-align: center"))
+                     (div (@ (class "hero-body"))
+                          (p (@ (class "title"))
+                             (a (@ (href "/ukiyo/"))
+                                "「浮世 (Ukiyo)」"))
+                          (img (@ (style "max-width: 100%")
+                                  (src "/static/ukiyo-image.jpg")))))
            (footer)
            ))))))))
 
@@ -136,8 +90,12 @@
         (cons
          "<!DOCTYPE html>"
          (sxml:sxml->html
-          (create-page
+          (create-page/title
            "浮世 Ukiyo -Seaknot Studios"
+
+           (breadcrumb '("Seaknot Studios" "/")
+                       '("Games" #f))
+
            `(img (@ (src "/static/ukiyo/ukiyo-poster.jpg")
                     (style "max-width: 90%")
                     (alt "ゲーム「浮世」のポスター")))
@@ -145,70 +103,66 @@
 
            '(div
              (section
-              (@ (style "margin-top: 10em;"))
-              (h3 "仮想空間を旅するサムライネコの物語")
-              (p "和風サイバーパンク仮想世界「UKIYO」は今日も多くのアバターで賑わっていた。")
-              (p "しかしそこに小さな異変が。"
-                 "なんとゲーム内のフレンドがみんなゲームの世界の住人になってしまったのだ。")
-              (p "現実世界に戻るため、サムライネコのカイが仲間とともに仮想空間を旅する。"))
+              (@ (class "section") (style "margin-top: 10em;"))
+              (div (@ (class "container"))
+                   (h3 (@ (class "title")) "仮想空間を旅するサムライネコの物語")
+                   (p "和風サイバーパンク仮想世界「UKIYO」は今日も多くのアバターで賑わっていた。")
+                   (p "しかしそこに小さな異変が。"
+                      "なんとゲーム内のフレンドがみんなゲームの世界の住人になってしまったのだ。")
+                   (p "現実世界に戻るため、サムライネコのカイが仲間とともに仮想空間を旅する。")))
 
              (section
-              (@ (style "margin-top: 10em;"))
-              (h3 "メディア")
-              (iframe (@ (style "width:560px;height:315px;max-width:100%")
-                         (src "https://www.youtube.com/embed/SqL2a7NQH84")
-                         (title "YouTube video player")
-                         (frameborder "0")
-                         (allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-                         (allowfullscreen "allowfullscreen")) ""))
+              (@ (class "section") (style "margin-top: 10em;"))
+              (div (@ (class "container"))
+                   (h3 (@ (class "title")) "メディア")
+                   (iframe (@ (style "width:560px;height:315px;max-width:100%")
+                              (src "https://www.youtube.com/embed/uaVUWUti4_Q")
+                              (title "YouTube video player")
+                              (frameborder "0")
+                              (allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
+                              (allowfullscreen "allowfullscreen")) "")))
 
              (section
-              (@ (style "margin-top: 10em;"))
-              (h3 "概要")
-              (table (@ (class "table"))
-                     (tr (td "ゲームジャンル")
-                         (td "和風サイバーパンクアドベンチャー"))
-                     (tr (td "制作")
-                         (td (a (@ (href "/"))
-                                "シーノットスタジオ")
-                             "、"
-                             (a (@ (href "https://freakydesign.com/")
-                                   (target "_blank")
-                                   (rel "noopener noreferrer"))
-                                "フリーキーデザイン")))
-                     (tr (td "対応プラットフォーム")
-                         (td "PC、Xbox One、他"))
-                     (tr (td "マルチプレイ対応")
-                         (td "シングルプレイ"))
-                     (tr (td "発売日")(td "2022")))))
+              (@ (class "section") (style "margin-top: 10em;"))
+              (div (@ (class "container"))
+                   (h3 (@ (class "title")) "概要")
+                   (table (@ (class "table"))
+                          (tr (td "ゲームジャンル")
+                              (td "和風サイバーパンクアドベンチャー"))
+                          (tr (td "制作")
+                              (td (a (@ (href "/"))
+                                     "シーノットスタジオ")
+                                  "、"
+                                  (a (@ (href "https://freakydesign.com/")
+                                        (target "_blank")
+                                        (rel "noopener noreferrer"))
+                                     "フリーキーデザイン")))
+                          (tr (td "対応プラットフォーム")
+                              (td "PC、Xbox One、他"))
+                          (tr (td "マルチプレイ対応")
+                              (td "シングルプレイ"))
+                          (tr (td "発売日")(td "2022"))))))
 
            (footer)
 
            ))))))))
 
-;; <nav aria-label="breadcrumb">
-;;   <ol class="breadcrumb">
-;;     <li class="breadcrumb-item"><a href="#">Home</a></li>
-;;     <li class="breadcrumb-item"><a href="#">Library</a></li>
-;;     <li class="breadcrumb-item active" aria-current="page">Data</li>
-;;   </ol>
-;; </nav>
-
 (define (breadcrumb . path)
-  `(nav (@ (aria-label "breadcrumb"))
-        (ol (@ (class "breadcrumb"))
+  `(nav (@ (class "breadcrumb")
+           (aria-label "breadcrumbs"))
+        (ul
          ,@(let loop ((path path))
             (if (null? path)
                 ()
                 (let ((p (car path)))
                   (if (pair? (cdr path))
-                      (cons #?=`(li (@ (class "breadcrumb-item"))
+                      (cons `(li
                                     (a ,(if (cadr path)
                                          `(@ (href ,(cadr p)))
                                          ())
                                     ,(car p)))
                             (loop (cdr path)))
-                      #?=`((li (@ (class "breadcrumb-item active"))
+                      `((li (@ (class "is-active"))
                            (a (@ ,@(if (cadr p)
                                    `((href ,(cadr p)))
                                    ())
@@ -226,24 +180,22 @@
   (^[req app]
     (violet-async
      (^[await]
-
-(print (breadcrumb '("Seaknot Studios" "/")
-                       '("News" #f)))
-
        (respond/ok
         req
         (cons
          "<!DOCTYPE html>"
          (sxml:sxml->html
-          (create-page
+          (create-page/title
            "お知らせ：BitSummit 2021 に浮世を出展 -Seaknot Studios"
 
            (breadcrumb '("Seaknot Studios" "/")
                        '("News" #f))
 
-           '(
-             (h1 "BitSummit THE 8th BIT に「浮世」を出展")
-
+           '(section
+             (@ (class "section"))
+             (p (span (@ (class "tag is-primary")) "2021-08-10"))
+             (h1 (@ (class "title"))
+                 "BitSummit THE 8th BIT に「浮世」を出展")
              (p "シーノット合同会社は "
                 "2021 年 9 月 2 日から 2 日間、京都市勧業館みやこめっせにて開かれるインディゲームの"
                 "イベント"
