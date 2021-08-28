@@ -3,7 +3,7 @@ SCRIPT=script.scm
 .PHONY: doc
 
 run: $(TARGET) $(RHEINGAU)
-	nodemon -e scm --ignore gosh-modules/ --exec violet $(SCRIPT)
+	while true; do violet $(SCRIPT); echo restarting...; sleep 60; done
 
 clean:
 	rm -rf *~ *.o $(TARGET) gosh-modules $(RHEINGAU) $(TARGET).dSYM
