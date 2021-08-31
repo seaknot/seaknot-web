@@ -101,47 +101,68 @@
                     (alt "ゲーム「浮世」のポスター")))
 
 
-           '(div
-             (section
-              (@ (class "section") (style "margin-top: 10em;"))
-              (div (@ (class "container"))
-                   (h3 (@ (class "title")) "仮想空間を旅するサムライネコの物語")
-                   (p "和風サイバーパンク仮想世界「UKIYO」は今日も多くのアバターで賑わっていた。")
-                   (p "しかしそこに小さな異変が。"
-                      "なんとゲーム内のフレンドがみんなゲームの世界の住人になってしまったのだ。")
-                   (p "現実世界に戻るため、サムライネコのカイが仲間とともに仮想空間を旅する。")))
+           '(section
+             (@ (class "section is-medium"))
+             (div (@ (class "container"))
+                  (h3 (@ (class "title")) "仮想空間を旅するサムライネコの物語")
+                  (p "和風サイバーパンク仮想世界「UKIYO」は今日も多くのアバターで賑わっていた。")
+                  (p "しかしそこに小さな異変が。"
+                     "なんとゲーム内のフレンドがみんなゲームの世界の住人になってしまったのだ。")
+                  (p "現実世界に戻るため、サムライネコのカイが仲間とともに仮想空間を旅する。")))
 
-             (section
-              (@ (class "section") (style "margin-top: 10em;"))
-              (div (@ (class "container"))
-                   (h3 (@ (class "title")) "メディア")
+           '(section
+             (@ (class "section is-medium"))
+             (div (@ (class "container"))
+                  (h3 (@ (class "title")) "体験版ダウンロード")
+                  (p "Steam にて体験版を提供しています。ぜひお試しください。")
+                  (iframe (@ (src "https://store.steampowered.com/widget/1610360/")
+                             (frameborder "0")
+                             (width "646")
+                             (height "190"))
+                          "")))
+
+           '(section
+             (@ (class "section is-medium"))
+             (div (@ (class "container"))
+                  (h3 (@ (class "title")) "メディア")
+
+                  (div
                    (iframe (@ (style "width:560px;height:315px;max-width:100%")
                               (src "https://www.youtube.com/embed/uaVUWUti4_Q")
                               (title "YouTube video player")
                               (frameborder "0")
                               (allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-                              (allowfullscreen "allowfullscreen")) "")))
+                              (allowfullscreen "allowfullscreen")) ""))
 
-             (section
-              (@ (class "section") (style "margin-top: 10em;"))
-              (div (@ (class "container"))
-                   (h3 (@ (class "title")) "概要")
-                   (table (@ (class "table"))
-                          (tr (td "ゲームジャンル")
-                              (td "和風サイバーパンクアドベンチャー"))
-                          (tr (td "制作")
-                              (td (a (@ (href "/"))
-                                     "シーノットスタジオ")
-                                  "、"
-                                  (a (@ (href "https://freakydesign.com/")
-                                        (target "_blank")
-                                        (rel "noopener noreferrer"))
-                                     "フリーキーデザイン")))
-                          (tr (td "対応プラットフォーム")
-                              (td "PC、Xbox One、他"))
-                          (tr (td "マルチプレイ対応")
-                              (td "シングルプレイ"))
-                          (tr (td "発売日")(td "2022"))))))
+                  (div
+                   (iframe (@ (style "width:560px;height:315px;max-width:100%")
+                              (src "https://www.youtube.com/embed/SqL2a7NQH84")
+                              (title "YouTube video player")
+                              (frameborder "0")
+                              (allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
+                              (allowfullscreen "allowfullscreen")) ""))))
+
+           '(section
+             (@ (class "section is-medium"))
+             (div (@ (class "container"))
+                  (h3 (@ (class "title")) "概要")
+                  (table (@ (class "table"))
+                         (tr (td "ゲームジャンル")
+                             (td "和風サイバーパンクアドベンチャー"))
+                         (tr (td "制作")
+                             (td (a (@ (href "/"))
+                                    "シーノットスタジオ")
+                                 "、"
+                                 (a (@ (href "https://freakydesign.com/")
+                                       (target "_blank")
+                                       (rel "noopener noreferrer"))
+                                    "フリーキーデザイン")))
+                         (tr (td "対応プラットフォーム")
+                             (td "PC、Xbox One、他"))
+                         (tr (td "マルチプレイ対応")
+                             (td "シングルプレイ"))
+                         (tr (td "発売日")(td "2022")))))
+
 
            (footer)
 
