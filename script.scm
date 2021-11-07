@@ -66,9 +66,11 @@
                         (style "max-width: 90%"))))
 
            '(div (@ (class "notification is-primary is-light"))
-                 "お知らせ："
-                 (a (@ (href "/news/2021/2021-08-10-ukiyo-bitsummit/"))
-                    "BitSummit THE 8th BIT に「浮世」を出展 (2021-08-10)"))
+                 (p "公式のお知らせはこちら："
+		    (a (@ (href "https://www.reddit.com/r/seaknot/collection/24cc4f9b-2f09-457f-9174-8a7d8dbefd2f"))
+		       "Seaknot Stuiods News"))
+		 (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
+		       "r/seaknot")))
 
            `(section (@ (class "hero")
                         (style "text-align: center"))
