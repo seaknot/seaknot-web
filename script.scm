@@ -47,6 +47,13 @@
                    " | Like us on "
                    (a (@ (href "https://www.facebook.com/seaknotstudios/"))
                       "our Facebook Page"))
+                (div (@ (id "indie-game-webring"))
+                     (script (@ (type "text/javascript")
+                                (src "https://ichigoichie.org/webring/onionring-variables.js"))
+                             "")
+                     (script (@ (type "text/javascript")
+                                (src "https://ichigoichie.org/webring/onionring-widget.js"))
+                             ""))
                 )))
 
 (define-http-handler "/"
