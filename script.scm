@@ -122,8 +122,8 @@
            '(section
              (@ (class "section is-medium"))
              (div (@ (class "container"))
-                  (h3 (@ (class "title")) "体験版ダウンロード")
-                  (p "Steam にて体験版を提供しています。ぜひお試しください。")
+                  (h3 (@ (class "title")) "Steam ページ")
+                  (p "ぜひウィッシュリストに追加してください。")
                   (iframe (@ (src "https://store.steampowered.com/widget/1610360/")
                              (frameborder "0")
                              (width "646")
