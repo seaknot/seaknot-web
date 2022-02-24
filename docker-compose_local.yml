@@ -1,0 +1,19 @@
+version: '2'
+services:
+  web:
+    build: .
+    expose:
+      - "2222"
+    ports:
+      - "2222:2222"
+    volumes:
+      - .:/code
+      - logvolume01:/var/log
+
+networks:
+   default:
+      external:
+         name: nginxproxy_default
+
+volumes:
+  logvolume01: {}
