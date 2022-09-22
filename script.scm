@@ -74,108 +74,16 @@
 
            '(div (@ (class "notification is-primary is-light"))
                  (p "公式のお知らせはこちら："
-		    (a (@ (href "https://www.reddit.com/r/seaknot/collection/24cc4f9b-2f09-457f-9174-8a7d8dbefd2f"))
-		       "Seaknot Stuiods News"))
-		 (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
-		       "r/seaknot")))
-
-           `(section (@ (class "hero")
-                        (style "text-align: center"))
-                     (div (@ (class "hero-body"))
-                          (p (@ (class "title"))
-                             (a (@ (href "/ukiyo/"))
-                                "「浮世 (Ukiyo)」"))
-                          (img (@ (style "max-width: 100%")
-                                  (src "/static/ukiyo-image.jpg")))))
+                    (a (@ (href "https://www.reddit.com/r/seaknot/collection/24cc4f9b-2f09-457f-9174-8a7d8dbefd2f"))
+                       "Seaknot Stuiods News"))
+                 (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
+                                                    "r/seaknot")))
            (footer)
            ))))))))
 
 (define-http-handler #/^\/ukiyo\/?$/
   (^[req app]
-    (violet-async
-     (^[await]
-       (respond/ok
-        req
-        (cons
-         "<!DOCTYPE html>"
-         (sxml:sxml->html
-          (create-page/title
-           "浮世 Ukiyo -Seaknot Studios"
-
-           (breadcrumb '("Seaknot Studios" "/")
-                       '("Games" #f))
-
-           `(img (@ (src "/static/ukiyo/ukiyo-poster.jpg")
-                    (style "max-width: 90%")
-                    (alt "ゲーム「浮世」のポスター")))
-
-
-           '(section
-             (@ (class "section is-medium"))
-             (div (@ (class "container"))
-                  (h3 (@ (class "title")) "仮想空間を旅するサムライネコの物語")
-                  (p "和風サイバーパンク仮想世界「UKIYO」は今日も多くのアバターで賑わっていた。")
-                  (p "しかしそこに小さな異変が。"
-                     "なんとゲーム内のフレンドがみんなゲームの世界の住人になってしまったのだ。")
-                  (p "現実世界に戻るため、サムライネコのカイが仲間とともに仮想空間を旅する。")))
-
-           '(section
-             (@ (class "section is-medium"))
-             (div (@ (class "container"))
-                  (h3 (@ (class "title")) "Steam ページ")
-                  (p "ぜひウィッシュリストに追加してください。")
-                  (iframe (@ (src "https://store.steampowered.com/widget/1610360/")
-                             (frameborder "0")
-                             (width "646")
-                             (height "190"))
-                          "")))
-
-           '(section
-             (@ (class "section is-medium"))
-             (div (@ (class "container"))
-                  (h3 (@ (class "title")) "メディア")
-
-                  (div
-                   (iframe (@ (style "width:560px;height:315px;max-width:100%")
-                              (src "https://www.youtube.com/embed/uaVUWUti4_Q")
-                              (title "YouTube video player")
-                              (frameborder "0")
-                              (allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-                              (allowfullscreen "allowfullscreen")) ""))
-
-                  (div
-                   (iframe (@ (style "width:560px;height:315px;max-width:100%")
-                              (src "https://www.youtube.com/embed/SqL2a7NQH84")
-                              (title "YouTube video player")
-                              (frameborder "0")
-                              (allow "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-                              (allowfullscreen "allowfullscreen")) ""))))
-
-           '(section
-             (@ (class "section is-medium"))
-             (div (@ (class "container"))
-                  (h3 (@ (class "title")) "概要")
-                  (table (@ (class "table"))
-                         (tr (td "ゲームジャンル")
-                             (td "和風サイバーパンクアドベンチャー"))
-                         (tr (td "制作")
-                             (td (a (@ (href "/"))
-                                    "シーノットスタジオ")
-                                 "、"
-                                 (a (@ (href "https://freakydesign.com/")
-                                       (target "_blank")
-                                       (rel "noopener noreferrer"))
-                                    "フリーキーデザイン")))
-                         (tr (td "対応プラットフォーム")
-                             (td "PC、Xbox One、他"))
-                         (tr (td "マルチプレイ対応")
-                             (td "シングルプレイ"))
-                         (tr (td "発売日")(td "2022")))))
-
-
-           (footer)
-
-           ))))))))
+    (respond/redirect req "https://shueisha-games.com/games/ukiyo/" 301)))
 
 (define (breadcrumb . path)
   `(nav (@ (class "breadcrumb")
