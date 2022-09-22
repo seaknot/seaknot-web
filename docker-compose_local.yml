@@ -9,6 +9,8 @@ services:
     volumes:
       - .:/code
       - logvolume01:/var/log
+    environment:
+      - NODEMON=1
 
 networks:
    default:

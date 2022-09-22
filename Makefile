@@ -3,7 +3,12 @@ SCRIPT=script.scm
 .PHONY: doc
 
 run: $(TARGET) $(RHEINGAU)
-	while true; do violet $(SCRIPT); echo restarting...; sleep 60; done
+	echo NODEMON = $$NODEMON
+	if [ v"$$NODEMON" != v ]; \
+		then nodemon --exec violet $(SCRIPT); \
+		else while true; do violet $(SCRIPT); \
+			echo restarting...; sleep 60; done; \
+	fi
 
 clean:
 	rm -rf *~ *.o $(TARGET) gosh-modules $(RHEINGAU) $(TARGET).dSYM
