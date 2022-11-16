@@ -73,6 +73,8 @@
                         (style "max-width: 90%"))))
 
            '(div (@ (class "notification is-primary is-light"))
+		 (p (a (@ (href "https://shueisha-games.com/games/ukiyo/"))
+		       "和風サイバーパンクアドベンチャーゲーム「浮世」特設ページ（集英社ゲームズ）"))
                  (p "公式のお知らせはこちら："
                     (a (@ (href "https://www.reddit.com/r/seaknot/collection/24cc4f9b-2f09-457f-9174-8a7d8dbefd2f"))
                        "Seaknot Stuiods News"))
