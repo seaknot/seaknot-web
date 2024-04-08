@@ -25,7 +25,7 @@
     (body
      ,@children
      (script (@ (src "/static/script.js")) "")
-     ,(google-analytics "UA-158830523-1")))
+     ,(google-analytics "G-V9X74LTX60")))
   )
 
 (define (google-analytics tag)
