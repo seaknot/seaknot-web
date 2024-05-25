@@ -72,11 +72,13 @@
                         (alt "Seaknot Studios")
                         (style "max-width: 90%"))))
 
-	   '(div (@ (class "level"))
-		 (div (@ (class "level-item has-text-centered"))
-		      (a (@ (href "https://twitter.com/seaknotstudios"))
-			     (img (@ (src "/static/brass/brass-title.jpg")
-				     (style "max-width: 90%"))))))
+           '(div (@ (class "level"))
+                 (div (@ (class "level-item has-text-centered"))
+                      (iframe (@ (src "https://store.steampowered.com/widget/3002060/?l=en")
+                                 (frameborder "0")
+                                 (width "800")
+                                 (height "190")) "")
+                      ))
 
            '(div (@ (class "notification is-primary is-light"))
                  (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
