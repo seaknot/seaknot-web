@@ -116,6 +116,10 @@
 
   )
 
+
+;;
+;; Brass
+;;
 (define-http-handler #/^\/games\/brass\/?$/
   (^[req app]
     (violet-async
@@ -223,3 +227,12 @@
 
 (define-http-handler #/^\/static\// (file-handler))
 (define-http-handler "/favicon.ico" (file-handler))
+
+;;;;; Joke
+
+(define-http-handler "/redirect-sakusaku"
+  (^[req app]
+    (violet-async
+     (^[await]
+       (respond/redirect req "https://www.lotte.co.jp/products/brand/koala/")
+       #;(respond/redirect req "https://www.kabaya.co.jp/catalog/sakupan/")))))
