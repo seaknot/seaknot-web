@@ -81,6 +81,7 @@
                       ))
 
            '(div (@ (class "notification is-primary is-light"))
+                 (p (a (@ (href "games/brass")) "Brass"))
                  (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
                                                     "r/seaknot")))
            (footer)
