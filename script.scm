@@ -86,10 +86,6 @@
            (footer)
            ))))))))
 
-(define-http-handler #/^\/ukiyo\/?$/
-  (^[req app]
-    (respond/redirect req "https://shueisha-games.com/games/ukiyo/" 301)))
-
 (define (breadcrumb . path)
   `(nav (@ (class "breadcrumb")
            (aria-label "breadcrumbs"))
@@ -118,6 +114,74 @@
          ))
 
   )
+
+(define-http-handler #/^\/games\/brass\/?$/
+  (^[req app]
+    (violet-async
+     (^[await]
+       (respond/ok
+        req
+        (cons
+         "<!DOCTYPE html>"
+         (sxml:sxml->html
+          (create-page/title
+           "Brass: a Cozy and Relaxing Adventure Game -Seaknot Studios"
+
+           (breadcrumb '("Seaknot Studios" "/")
+                       '("Games" #f))
+
+           '(div (@ (class "container"))
+                 (div (@ (class "content"))
+                      (p (span (@ (class "tag is-primary")) "2024-04-25"))
+
+                      (section
+                       (@ (class "hero"))
+                       (div (@ (class "hero-body"))
+                            (p (@ (class "title")) "Brass")
+                            (p (@ (class "subtitle"))
+                               "a Cozy and Relaxing Adventure Game")
+
+                            (img (@ (src "/static/Brass-KeyArt.png")))
+
+                            (div (@ (class "level"))
+                                 (div (@ (class "level-item has-text-centered"))
+                                      (iframe (@ (src "https://store.steampowered.com/widget/3002060/?l=en")
+                                                 (frameborder "0")
+                                                 (width "800")
+                                                 (height "190")) "")
+                                      ))))
+
+                      (h3 (@ (class "title is-3")) "概要 Overview")
+
+                      (ul (li "タイトル/Title: Brass")
+                          (li "価格/Price: $9.99 (1,200 円)")
+                          (li "発売日/Release Date: 2025-04-25")
+                          (li "開発者/Developer: シーノットスタジオ/Seaknot Studios")
+                          (li "URL: https://seaknot.dev/games/brass")
+                          (li "Steam: https://store.steampowered.com/app/3002060/Brass/"))
+
+                      (p (a (@ (href "https://drive.google.com/drive/folders/1QdczugOyb9EcYbHD1rkQ2ZfQysuGY8gr"))
+                            "Press Kit (Google Drive)"))
+
+                      (h3 (@ (class "title is-3")) "Description")
+
+                      (p "The only post office in a small village in the mountains, the main character of this story, Brass, works here. "
+                         "His job is to deliver letters and packages to the local people. "
+                         "One day, Brass receives a letter from his grandmother who lives in a town by the sea, and a new adventure begins. ")
+
+
+                      (h3 (@ (class "title is-3")) "説明")
+
+                      (p "山あいの小さな村にひとつだけの郵便局、この物語の主人公ブラスはここで働いています。村の人たちに手紙や荷物を届けるのが彼の仕事です。"
+                         "ある日、ブラスは海沿いの町に住むおばあちゃんから手紙を受け取り、新しい冒険が始まります。")
+                      (section
+                       (@ (class "section"))
+
+
+                       )))
+           (footer)
+
+           ))))))))
 
 (define-http-handler #/^\/news\/2021\/2021-08-10-ukiyo-bitsummit\/?$/
   (^[req app]
