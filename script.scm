@@ -40,7 +40,7 @@
 (define (footer)
   `(footer (@ (class "footer"))
            (div (@ (class "content"))
-                (p "© " (a (@ (href "/")) "Seaknot Studios G.K.") " 2020-2021.")
+                (p "© " (a (@ (href "/")) "Seaknot Studios G.K.") " 2020-2025.")
                 (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
                    (a (@ (href "https://twitter.com/seaknotstudios"))
                       "@seaknotstudios")
