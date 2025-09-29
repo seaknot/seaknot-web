@@ -46,7 +46,9 @@
                       "@seaknotstudios")
                    " | Like us on "
                    (a (@ (href "https://www.facebook.com/seaknotstudios/"))
-                      "our Facebook Page"))
+                      "our Facebook Page")
+                   " | "
+                   (a (@ (href "/static/privacy-policy.html")) "Privacy Policy"))
                 (div (@ (id "indie-game-webring"))
                      (script (@ (type "text/javascript")
                                 (src "https://ichigoichie.org/webring/onionring-variables.js"))
@@ -81,7 +83,9 @@
                       ))
 
            '(div (@ (class "notification is-primary is-light"))
-                 (p (a (@ (href "games/brass")) "Brass"))
+                 (p (a (@ (href "games/brass")) "Brass")
+                    " "
+                    (a (@ (href "/static/privacy-policy.html")) "Privacy Policy"))
                  (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
                                                     "r/seaknot")))
            (footer)
