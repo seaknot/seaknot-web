@@ -142,7 +142,7 @@
            (breadcrumb '("Seaknot Studios" "/")
                        '("Games" #f))
 
-           '(div (@ (class "container"))
+           `(div (@ (class "container"))
                  (div (@ (class "content"))
                       (p (span (@ (class "tag is-primary")) "2025-10-16"))
 
