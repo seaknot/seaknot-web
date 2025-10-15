@@ -1,4 +1,3 @@
-version: '2'
 services:
   web:
     build: .
@@ -10,12 +9,13 @@ services:
       - .:/code
       - logvolume01:/var/log
     environment:
-      - NODEMON=1
+      NODEMON:
+      SLEEPTIME: 0
 
 networks:
    default:
-      external:
-         name: nginxproxy_default
+      name: nginxproxy_default
+      external: true
 
 volumes:
   logvolume01: {}

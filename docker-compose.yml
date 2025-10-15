@@ -6,6 +6,8 @@ services:
       VIRTUAL_HOST: seaknot.dev
       LETSENCRYPT_HOST: seaknot.dev
       LETSENCRYPT_EMAIL: toru-letsencrypt@torus.jp
+      NODEMON:
+      SLEEPTIME: 60
     expose:
     - "2222"
     volumes:
