@@ -58,6 +58,9 @@
                              ""))
                 )))
 
+(define (static-url path)
+  #"//d1toc4gkz4n0vi.cloudfront.net/~path")
+
 (define-http-handler "/"
   (^[req app]
     (violet-async
@@ -70,7 +73,7 @@
           (create-page/title
            "Seaknot Studios"
            `(h1 (@ (style "text-align: center"))
-                (img (@ (src "/static/seaknot-logo-512x256.png")
+                (img (@ (src ,(static-url "seaknot-logo-512x256.png"))
                         (alt "Seaknot Studios")
                         (style "max-width: 90%"))))
 
@@ -141,16 +144,17 @@
 
            '(div (@ (class "container"))
                  (div (@ (class "content"))
-                      (p (span (@ (class "tag is-primary")) "2024-04-25"))
+                      (p (span (@ (class "tag is-primary")) "2025-10-16"))
 
                       (section
                        (@ (class "hero"))
                        (div (@ (class "hero-body"))
                             (p (@ (class "title")) "Brass")
                             (p (@ (class "subtitle"))
-                               "a Cozy and Relaxing Adventure Game")
+                               "A Peaceful, Cozy Adventure")
 
-                            (img (@ (src "/static/Brass-KeyArt.png")))
+                            (img (@ (src ,(static-url
+                                           "Brass_key_art_w_face1920x1080.png"))))
 
                             (div (@ (class "level"))
                                  (div (@ (class "level-item has-text-centered"))
@@ -163,10 +167,11 @@
                       (h3 (@ (class "title is-3")) "概要 Overview")
 
                       (ul (li "タイトル/Title: Brass")
-                          (li "価格/Price: $9.99 (1,200 円)")
+                          (li "価格/Price: $5.99 (700 円)")
                           (li "発売日/Release Date: 2025-04-25")
                           (li "開発者/Developer: シーノットスタジオ/Seaknot Studios")
                           (li "URL: https://seaknot.dev/games/brass")
+                          (li "Xbox One: https://www.xbox.com/en-US/games/store/brass-a-peaceful-cozy-adventure/9mstlw907dbf")
                           (li "Steam: https://store.steampowered.com/app/3002060/Brass/"))
 
                       (p (a (@ (href "https://drive.google.com/drive/folders/1QdczugOyb9EcYbHD1rkQ2ZfQysuGY8gr"))
