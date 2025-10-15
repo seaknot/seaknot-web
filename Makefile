@@ -4,10 +4,13 @@ SCRIPT=script.scm
 
 run: $(TARGET) $(RHEINGAU)
 	echo NODEMON = $$NODEMON
+	echo SLEEPTIME = $$SLEEPTIME
 	if [ v"$$NODEMON" != v ]; \
-		then nodemon --exec violet $(SCRIPT); \
-		else while true; do violet $(SCRIPT); \
-			echo restarting...; sleep 60; done; \
+	    then nodemon --exec violet $(SCRIPT); \
+	else while true; \
+	    do sh -c 'echo $$$$ > violet-pid; exec violet $(SCRIPT)'; \
+	        echo restarting...; sleep $$SLEEPTIME; \
+	    done; \
 	fi
 
 clean:
