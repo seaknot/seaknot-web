@@ -58,8 +58,10 @@
                              ""))
                 )))
 
-(define (static-url path)
-  #"//d1toc4gkz4n0vi.cloudfront.net/~path")
+(define (static-url req path)
+  (if (string=? (request-server-host req) "localhost")
+      #"/static/~path"
+      #"//d1toc4gkz4n0vi.cloudfront.net/~path"))
 
 (define-http-handler "/"
   (^[req app]
@@ -73,7 +75,7 @@
           (create-page/title
            "Seaknot Studios"
            `(h1 (@ (style "text-align: center"))
-                (img (@ (src ,(static-url "seaknot-logo-512x256.png"))
+                (img (@ (src ,(static-url req "seaknot-logo-512x256.png"))
                         (alt "Seaknot Studios")
                         (style "max-width: 90%"))))
 
@@ -87,7 +89,7 @@
 
            '(div (@ (class "notification is-primary is-light"))
                  (p (a (@ (href "games/brass")) "Brass")
-                    " "
+                    " > "
                     (a (@ (href "/static/privacy-policy.html")) "Privacy Policy"))
                  (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
                                                     "r/seaknot")))
@@ -153,16 +155,36 @@
                             (p (@ (class "subtitle"))
                                "A Peaceful, Cozy Adventure")
 
-                            (img (@ (src ,(static-url
+                            (img (@ (src ,(static-url req
                                            "Brass_key_art_w_face1920x1080.png"))))
 
-                            (div (@ (class "level"))
-                                 (div (@ (class "level-item has-text-centered"))
-                                      (iframe (@ (src "https://store.steampowered.com/widget/3002060/?l=en")
-                                                 (frameborder "0")
-                                                 (width "800")
-                                                 (height "190")) "")
-                                      ))))
+                            ))
+
+                      (h3 (@ (class "title is-3")) "Download")
+
+                      (div (@ (class "level"))
+                           (div (@ (class "level-item has-text-centered"))
+                                (a (@ (href "https://www.xbox.com/games/store/brass-a-peaceful-cozy-adventure/9mstlw907dbf")
+                                      (target "_blank") (rel "noopener"))
+                                   (img (@ (src ,(static-url
+                                                  req "xbox-logo-352w.png"))
+                                           (alt "Xbox One")))))
+                           (div (@ (class "level-item has-text-centered"))
+                                (a (@ (href "https://store-jp.nintendo.com/item/software/D70010000105463")
+                                      ;; TODO: replace this with US region later
+                                      (target "_blank") (rel "noopener"))
+                                   (img (@ (src ,(static-url
+                                                  req "switch-logo-188w.png"))
+                                           (alt "Nintendo Switch")
+                                           )))))
+
+                      (div (@ (class "level"))
+                           (div (@ (class "level-item has-text-centered"))
+                                (iframe (@ (src "https://store.steampowered.com/widget/3002060/?l=en")
+                                           (frameborder "0")
+                                           (width "800")
+                                           (height "190")) "")
+                                ))
 
                       (h3 (@ (class "title is-3")) "概要 Overview")
 
