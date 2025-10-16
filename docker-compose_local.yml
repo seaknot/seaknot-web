@@ -11,6 +11,7 @@ services:
     environment:
       NODEMON:
       SLEEPTIME: 0
+      LOCALHOST: 1
 
 networks:
    default:

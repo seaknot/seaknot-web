@@ -59,7 +59,7 @@
                 )))
 
 (define (static-url req path)
-  (if (string=? (request-server-host req) "localhost")
+  (if (sys-getenv "LOCALHOST")
       #"/static/~path"
       #"//d1toc4gkz4n0vi.cloudfront.net/~path"))
 
