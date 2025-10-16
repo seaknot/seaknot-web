@@ -148,19 +148,21 @@
                  (div (@ (class "content"))
                       (p (span (@ (class "tag is-primary")) "2025-10-16"))
 
+                      (h1 (@ (class "is-1 title")) "Brass")
+                      (p (@ (class "subtitle"))
+                         "A Peaceful, Cozy Adventure")
+                      (p (@ (class "subtitle"))
+                         "のんびり、ほのぼのアドベンチャーゲーム")
+
                       (section
                        (@ (class "hero"))
                        (div (@ (class "hero-body"))
-                            (p (@ (class "title")) "Brass")
-                            (p (@ (class "subtitle"))
-                               "A Peaceful, Cozy Adventure")
-
                             (img (@ (src ,(static-url req
                                            "Brass_key_art_w_face1920x1080.png"))))
 
                             ))
 
-                      (h3 (@ (class "title is-3")) "Download")
+                      (h3 (@ (class "title is-3")) "Downloads")
 
                       (div (@ (class "level"))
                            (div (@ (class "level-item has-text-centered"))
