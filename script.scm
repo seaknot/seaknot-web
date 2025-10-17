@@ -46,9 +46,7 @@
                       "@seaknotstudios")
                    " | Like us on "
                    (a (@ (href "https://www.facebook.com/seaknotstudios/"))
-                      "our Facebook Page")
-                   " | "
-                   (a (@ (href "/static/privacy-policy.html")) "Privacy Policy"))
+                      "our Facebook Page"))
                 (div (@ (id "indie-game-webring"))
                      (script (@ (type "text/javascript")
                                 (src "https://ichigoichie.org/webring/onionring-variables.js"))
@@ -74,26 +72,25 @@
          (sxml:sxml->html
           (create-page/title
            "Seaknot Studios"
-           `(h1 (@ (style "text-align: center"))
-                (img (@ (src ,(static-url req "seaknot-logo-512x256.png"))
-                        (alt "Seaknot Studios")
-                        (style "max-width: 90%"))))
+           `(div (@ (class "container"))
+                 (div (@ (class "content"))
+                      (h1 (@ (style "text-align: center"))
+                          (img (@ (src ,(static-url req "seaknot-logo-512x256.png"))
+                                  (alt "Seaknot Studios")
+                                  (style "max-width: 90%"))))
 
-           '(div (@ (class "level"))
-                 (div (@ (class "level-item has-text-centered"))
-                      (iframe (@ (src "https://store.steampowered.com/widget/3002060/?l=en")
-                                 (frameborder "0")
-                                 (width "800")
-                                 (height "190")) "")
-                      ))
+                      ((div
+                        (@ (class "level"))
+                        (div (@ (class "level-item"))
+                             (a (@ (href "/games/brass"))
+                                (img (@ (src ,(static-url req "library_header.png")))))
+                             )))
 
-           '(div (@ (class "notification is-primary is-light"))
-                 (p (a (@ (href "games/brass")) "Brass")
-                    " > "
-                    (a (@ (href "/static/privacy-policy.html")) "Privacy Policy"))
-                 (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
-                                                    "r/seaknot")))
-           (footer)
+                      (div (@ (class "notification is-primary is-light"))
+                           (p (a (@ (href "games/brass")) "Brass"))
+                           (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
+                                                              "r/seaknot")))
+                      ,(footer)))
            ))))))))
 
 (define (breadcrumb . path)
@@ -166,27 +163,25 @@
 
                       (div (@ (class "level"))
                            (div (@ (class "level-item has-text-centered"))
+                                (a (@ (href "https://store.steampowered.com/app/3002060/Brass/")
+                                      (target "_blank") (rel "noopener"))
+                                   (img (@ (src ,(static-url
+                                                  req "steam-logo-254w.png"))
+                                           (alt "Steam")
+                                           ))))
+                           (div (@ (class "level-item has-text-centered"))
                                 (a (@ (href "https://www.xbox.com/games/store/brass-a-peaceful-cozy-adventure/9mstlw907dbf")
                                       (target "_blank") (rel "noopener"))
                                    (img (@ (src ,(static-url
-                                                  req "xbox-logo-352w.png"))
+                                                  req "xbox-logo-200w.png"))
                                            (alt "Xbox One")))))
                            (div (@ (class "level-item has-text-centered"))
-                                (a (@ (href "https://store-jp.nintendo.com/item/software/D70010000105463")
-                                      ;; TODO: replace this with US region later
+                                (a (@ (href "https://www.nintendo.com/us/store/products/brass-switch/")
                                       (target "_blank") (rel "noopener"))
                                    (img (@ (src ,(static-url
-                                                  req "switch-logo-188w.png"))
+                                                  req "switch-logo-120w.png"))
                                            (alt "Nintendo Switch")
                                            )))))
-
-                      (div (@ (class "level"))
-                           (div (@ (class "level-item has-text-centered"))
-                                (iframe (@ (src "https://store.steampowered.com/widget/3002060/?l=en")
-                                           (frameborder "0")
-                                           (width "800")
-                                           (height "190")) "")
-                                ))
 
                       (h3 (@ (class "title is-3")) "概要 Overview")
 
@@ -196,10 +191,8 @@
                           (li "開発者/Developer: シーノットスタジオ/Seaknot Studios")
                           (li "URL: https://seaknot.dev/games/brass")
                           (li "Xbox One: https://www.xbox.com/en-US/games/store/brass-a-peaceful-cozy-adventure/9mstlw907dbf")
+                          (li "Nintendo Switch: https://www.nintendo.com/us/store/products/brass-switch/")
                           (li "Steam: https://store.steampowered.com/app/3002060/Brass/"))
-
-                      (p (a (@ (href "https://drive.google.com/drive/folders/1QdczugOyb9EcYbHD1rkQ2ZfQysuGY8gr"))
-                            "Press Kit (Google Drive)"))
 
                       (h3 (@ (class "title is-3")) "Description")
 
@@ -212,11 +205,24 @@
 
                       (p "山あいの小さな村にひとつだけの郵便局、この物語の主人公ブラスはここで働いています。村の人たちに手紙や荷物を届けるのが彼の仕事です。"
                          "ある日、ブラスは海沿いの町に住むおばあちゃんから手紙を受け取り、新しい冒険が始まります。")
-                      (section
-                       (@ (class "section"))
 
 
-                       )))
+                      (h3 (@ (class "title is-3"))
+                          "リソース Resources")
+
+                      (ul
+                       (li (a (@ (href "https://drive.google.com/drive/folders/1QdczugOyb9EcYbHD1rkQ2ZfQysuGY8gr")
+                                 (target "_blank") (rel "noopener"))
+                              (span (@ (class "icon"))
+                                    (i (@ (class "fas fa-file-alt")) ""))
+                              " Press Kit (Google Drive)"))
+                       (li (a (@ (href "/static/privacy-policy.html")
+                                 (target "_blank") (rel "noopener"))
+                              (span (@ (class "icon"))
+                                    (i (@ (class "fas fa-file-alt")) ""))
+                              " Brass Privacy Policy")))
+
+                      ))
            (footer)
 
            ))))))))
