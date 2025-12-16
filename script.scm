@@ -41,12 +41,17 @@
   `(footer (@ (class "footer"))
            (div (@ (class "content"))
                 (p "© " (a (@ (href "/")) "Seaknot Studios G.K.") " 2020-2025.")
-                (p "Contact: hello@seaknot.dev | Follow us on Twitter: "
+                (p (span (@ (class "icon"))
+			 (i (@ (class "far fa-envelope")) ""))
+		   "hello@seaknot.dev | Follow us on Twitter: "
                    (a (@ (href "https://twitter.com/seaknotstudios"))
                       "@seaknotstudios")
                    " | Like us on "
                    (a (@ (href "https://www.facebook.com/seaknotstudios/"))
                       "our Facebook Page"))
+		(p (span (@ (class "icon"))
+			 (i (@ (class "far fa-building")) ""))
+		   "シーノット合同会社 〒103-0026 東京都中央区日本橋兜町17番2号 兜町第6葉山ビル4階")
                 (div (@ (id "indie-game-webring"))
                      (script (@ (type "text/javascript")
                                 (src "https://ichigoichie.org/webring/onionring-variables.js"))
@@ -87,8 +92,11 @@
                              )))
 
                       (div (@ (class "notification is-primary is-light"))
-                           (p (a (@ (href "games/brass")) "Brass"))
-                           (p "その他の掲載情報はこちら：" (a (@ (href "https://www.reddit.com/r/seaknot/"))
+			   (h3 (@ (class "title is-3")) "About Seaknot Studios")
+			   (p "Seaknot Studios is a small game development studio based in Japan, dedicated to creating engaging and story‑driven adventure games. We developed and released "
+			      (a (@ (href "games/brass")) "Brass")
+			      ", our first original title, and continue to craft new experiences for players around the world.")
+                           (p "News: " (a (@ (href "https://www.reddit.com/r/seaknot/"))
                                                               "r/seaknot")))
                       ,(footer)))
            ))))))))
@@ -175,6 +183,11 @@
                                    (img (@ (src ,(static-url
                                                   req "xbox-logo-200w.png"))
                                            (alt "Xbox One")))))
+			   (div (@ (class "level-item has-text-centered"))
+                                (a (@ (href "https://apps.microsoft.com/detail/9mstlw907dbf?referrer=appbadge&mode=direct")
+                                      (target "_blank") (rel "noopener"))
+                                   (img (@ (src "https://get.microsoft.com/images/en-us%20dark.svg")
+                                           (alt "Microsoft Store")))))
                            (div (@ (class "level-item has-text-centered"))
                                 (a (@ (href "https://www.nintendo.com/us/store/products/brass-switch/")
                                       (target "_blank") (rel "noopener"))
