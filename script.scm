@@ -134,6 +134,15 @@
 ;;
 ;; Brass
 ;;
+(define (brass-badge req url img alt-text)
+  `(div (@ (class "level-item has-text-centered"))
+        (a (@ (href ,url)
+              (target "_blank") (rel "noopener"))
+           (img (@ (src ,(static-url
+                          req img))
+                   (alt ,alt-text)
+                   )))))
+
 (define-http-handler #/^\/games\/brass\/?$/
   (^[req app]
     (violet-async
@@ -170,31 +179,30 @@
                       (h3 (@ (class "title is-3")) "Downloads")
 
                       (div (@ (class "level"))
-                           (div (@ (class "level-item has-text-centered"))
-                                (a (@ (href "https://store.steampowered.com/app/3002060/Brass/")
-                                      (target "_blank") (rel "noopener"))
-                                   (img (@ (src ,(static-url
-                                                  req "steam-logo-254w.png"))
-                                           (alt "Steam")
-                                           ))))
-                           (div (@ (class "level-item has-text-centered"))
-                                (a (@ (href "https://www.xbox.com/games/store/brass-a-peaceful-cozy-adventure/9mstlw907dbf")
-                                      (target "_blank") (rel "noopener"))
-                                   (img (@ (src ,(static-url
-                                                  req "xbox-logo-200w.png"))
-                                           (alt "Xbox One")))))
-			   (div (@ (class "level-item has-text-centered"))
-                                (a (@ (href "https://apps.microsoft.com/detail/9mstlw907dbf?referrer=appbadge&mode=direct")
-                                      (target "_blank") (rel "noopener"))
-                                   (img (@ (src "https://get.microsoft.com/images/en-us%20dark.svg")
-                                           (alt "Microsoft Store")))))
-                           (div (@ (class "level-item has-text-centered"))
-                                (a (@ (href "https://www.nintendo.com/us/store/products/brass-switch/")
-                                      (target "_blank") (rel "noopener"))
-                                   (img (@ (src ,(static-url
-                                                  req "switch-logo-120w.png"))
-                                           (alt "Nintendo Switch")
-                                           )))))
+                           ,(brass-badge
+                             req
+                             "https://store.steampowered.com/app/3002060/Brass/"
+                             "steam-logo-254w.png" "Steam")
+                           ,(brass-badge
+                             req
+                             "https://www.xbox.com/games/store/brass-a-peaceful-cozy-adventure/9mstlw907dbf"
+                             "xbox-logo-200w.png" "Xbox One")
+                           ,(brass-badge
+                             req
+                             "https://www.nintendo.com/us/store/products/brass-switch/"
+                             "switch-logo-120w.png" "Nintendo Switch")
+                           )
+                      (div (@ (class "level") (style "zoom: 150%"))
+                           ,(brass-badge
+                             req
+                             "https://apps.microsoft.com/detail/9mstlw907dbf?referrer=appbadge&mode=direct"
+                             "msstore-en-us-dark.svg" "Microsoft Store")
+                           ,(brass-badge
+                             req
+                             "https://apps.apple.com/us/app/brass-peaceful-cozy-adventure/id6756993080"
+                             "badge-download-on-the-mac-app-store.svg"
+                             "Mac App Store")
+                           )
 
                       (h3 (@ (class "title is-3")) "概要 Overview")
 
@@ -202,10 +210,7 @@
                           (li "価格/Price: $5.99 (700 円)")
                           (li "発売日/Release Date: 2025-04-25")
                           (li "開発者/Developer: シーノットスタジオ/Seaknot Studios")
-                          (li "URL: https://seaknot.dev/games/brass")
-                          (li "Xbox One: https://www.xbox.com/en-US/games/store/brass-a-peaceful-cozy-adventure/9mstlw907dbf")
-                          (li "Nintendo Switch: https://www.nintendo.com/us/store/products/brass-switch/")
-                          (li "Steam: https://store.steampowered.com/app/3002060/Brass/"))
+                          (li "URL: https://seaknot.dev/games/brass"))
 
                       (h3 (@ (class "title is-3")) "Description")
 
@@ -277,7 +282,17 @@
 
            ))))))))
 
-(define-http-handler #/^\/static\// (file-handler))
+(define-http-handler #/^\/static\//
+  (let ((handler (file-handler)))
+    (^[req app]
+      (parameterize ((file-mime-type
+                      (^[path]
+                        (rxmatch-case path
+                                      [#/\.svg$/ () "image/svg+xml"]
+                                      [else ()])) ; fallback
+                      ))
+        (handler req app)))))
+
 (define-http-handler "/favicon.ico" (file-handler))
 
 ;;;;; Joke
