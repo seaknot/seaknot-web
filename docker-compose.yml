@@ -17,7 +17,7 @@ services:
 networks:
    default:
       external:
-         name: nginxproxy_default
+         name: nginx-proxy_default
 
 volumes:
   logvolume01: {}
